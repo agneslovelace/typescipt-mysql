@@ -1,14 +1,28 @@
-import "reflect-metadata"
-import mysql, { ConnectionOptions } from 'mysql2';
+import { AppDataSource } from "./data-source"
+import { User } from "./entity/User"
+import { Word } from "./entity/Word"
 
-const access: ConnectionOptions = {
-  user: 'chrisd',
-  database: 'test_db',
-  password: 'hamamushi'
-};
+AppDataSource.initialize().then(async () => {
 
-const conn = mysql.createConnection(access);
+    console.log("Inserting a new user into the database...")
+    const user = new User()
+    user.firstName = "Timber"
+    user.lastName = "Saw"
+    user.age = 25
+    // await AppDataSource.manager.save(user)
+    console.log("Saved a new user with id: " + user.id)
 
-conn.query('SELECT * from `users`;', (_err, rows) => {
-  console.log(rows)
-});
+    console.log("Loading users from the database...")
+    const users = await AppDataSource.manager.find(User)
+    console.log("Loaded users: ", users)
+    
+    console.log("Here you can setup and run express / fastify / any other framework.")
+    
+    const word = new Word()
+    word.word = "Scaffold"
+    word.translation = "Строительные леса"
+    // await AppDataSource.manager.save(word)
+    const words = await AppDataSource.manager.find(Word)
+    console.log("Loaded words: ", words)
+
+}).catch(error => console.log(error))
