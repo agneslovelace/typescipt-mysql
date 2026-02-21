@@ -1,0 +1,28 @@
+# Зависимости
+node_modules/
+package-lock.json
+
+# Сборка
+dist/
+build/
+
+# Логи и отладка
+*.log
+npm-debug.log*
+
+# Окружение
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Тесты
+coverage/
+
+# TypeScript
+*.tsbuildinfo
