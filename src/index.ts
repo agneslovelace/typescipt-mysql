@@ -1,5 +1,4 @@
 import { AppDataSource } from "./data-source";
-import { User } from "./entity/User";
 import { Word } from "./entity/Word";
 import express from "express";
 import cors from "cors";
